@@ -1,7 +1,8 @@
-package com.smartparking;
+package com.smartparking.services;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,14 @@ public class ParkingService {
 		return newState;
 	}
 	
-	public ParkingLot getFreeParkingLot() {
-		return vacancies.stream()
-				.filter(v -> v.getState().equals(Boolean.TRUE))
-				.findFirst().get();
+	public ParkingLot getFreeParkingLot() throws Exception {
+		Optional<ParkingLot> opt = vacancies.stream()
+											.filter(v -> v.getState().equals(Boolean.FALSE))
+											.findAny();
+		if (!opt.isPresent()) {
+			throw new Exception("Não há vagas disponíveis");
+		}
+		return opt.get();
 	}
 	
 }

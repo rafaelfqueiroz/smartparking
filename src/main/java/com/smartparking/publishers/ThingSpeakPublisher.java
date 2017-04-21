@@ -1,4 +1,4 @@
-package com.smartparking.consumers;
+package com.smartparking.publishers;
 
 import java.net.URI;
 

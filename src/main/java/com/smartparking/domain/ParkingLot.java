@@ -9,6 +9,8 @@ public class ParkingLot implements Feed {
 	private Integer number;
 	private Boolean state;
 	
+	public ParkingLot() {}
+	
 	public ParkingLot(Integer number, Boolean state) {
 		this.number = number;
 		this.state = state;

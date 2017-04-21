@@ -4,10 +4,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.smartparking.consumers.ThingSpeakPublisher;
 import com.smartparking.interfaces.Feed;
+import com.smartparking.publishers.ThingSpeakPublisher;
 
+@Component
 public class ThingSpeakNotifier implements Notifier {
 	
 	private static final String DEFAULT_THINSPEAK_URL = "https://api.thingspeak.com/";
@@ -17,7 +19,7 @@ public class ThingSpeakNotifier implements Notifier {
 	
 	@Override
 	public void notifyEntrance(Feed feed) {
-		notify(feed, "/channel_id") ;
+		//notify(feed, "/channel_id");
 	}
 	
 	@Override
