@@ -60,6 +60,4 @@ public class ParkingLot implements Feed {
 		return true;
 	}
 	
-	
-	
 }
