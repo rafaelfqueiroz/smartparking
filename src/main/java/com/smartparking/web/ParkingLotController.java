@@ -1,6 +1,9 @@
 package com.smartparking.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +22,10 @@ public class ParkingLotController {
 	@PostMapping(value="/occupy")
 	public boolean occupy(@RequestBody ParkingLot parkingLot) {
 		return parking.occupyParkingLot(parkingLot);
+	}
+	
+	@GetMapping(value="/lots")
+	public List<ParkingLot> getAllParkingLot() {
+		return parking.getParkingLots();
 	}
 }

@@ -42,5 +42,9 @@ public class ParkingService {
 		}
 		return opt.get();
 	}
+
+	public List<ParkingLot> getParkingLots() {
+		return this.vacancies;
+	}
 	
 }
