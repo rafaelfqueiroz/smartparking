@@ -23,7 +23,12 @@ repositories {
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
+	compile("org.springframework.boot:spring-boot-starter")
 	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	
+	//databases dependencies
+	compile("org.postgresql:postgresql")
+	compile("org.hsqldb:hsqldb")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -1,10 +1,21 @@
 package com.smartparking.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.smartparking.interfaces.Feed;
 
+@Entity
+@Table(name="parking_lot")
 public class ParkingLot implements Feed {
 	
 	private static final long serialVersionUID = -7878268966987387608L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Integer number;
 	private Boolean state;
