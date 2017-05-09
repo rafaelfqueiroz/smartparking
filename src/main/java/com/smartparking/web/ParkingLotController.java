@@ -27,19 +27,21 @@ public class ParkingLotController {
 	
 	@PostMapping(value="/occupy")
 	public ResponseEntity<ParkingLot> occupy(@RequestBody ParkingLot parkingLot) {
-		ParkingLot lot = parkingRepository.findByNumber(parkingLot.getNumber());
+		ParkingLot lot = parking.occupyParkingLot(parkingLot); 
+				//parkingRepository.findByNumber(parkingLot.getNumber());
 		if (lot == null) {
 			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
 		}
 		
 		lot.setState(parkingLot.getState());
-		parkingRepository.save(lot);
+		//parkingRepository.save(lot);
 		return new ResponseEntity<>(lot, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/lots")
 	public ResponseEntity<List<ParkingLot>> getAllParkingLot() {
-		List<ParkingLot> lots = parkingRepository.findByState(false);
+		List<ParkingLot> lots = parking.getParkingLots(); 
+				//parkingRepository.findByState(false);
 		return new ResponseEntity<>(lots, HttpStatus.OK);
 	}
 	

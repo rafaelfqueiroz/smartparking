@@ -24,11 +24,11 @@ public class ParkingService {
 				});
 	}
 
-	public boolean occupyParkingLot(ParkingLot parkingLot) {
-		Boolean newState = vacancies.stream().filter(v -> v.equals(parkingLot))
+	public ParkingLot occupyParkingLot(ParkingLot parkingLot) {
+		ParkingLot newState = vacancies.stream().filter(v -> v.equals(parkingLot))
 						  			.map(v -> {
 						  				v.setState(parkingLot.getState());
-						  				return v.getState();
+						  				return v;
 						  			}).findFirst().get();
 		return newState;
 	}
