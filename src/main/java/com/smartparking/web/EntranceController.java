@@ -1,6 +1,8 @@
 package com.smartparking.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +27,13 @@ public class EntranceController {
 	private Notifier notifier;
 	
 	@PostMapping(value="/car")
-	public ParkingLot entrance(@RequestBody CarParking car) throws Exception {
+	public ResponseEntity<ParkingLot> entrance(@RequestBody CarParking car) throws Exception {
 		ParkingLot lot = parking.getFreeParkingLot();
+		if (lot == null) {
+			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
+		}
 		notifier.notifyEntrance(lot);
-		return lot;
+		return new ResponseEntity<>(lot, HttpStatus.OK);
 	}
 	
 }
