@@ -16,11 +16,11 @@ public class CarParking implements Car {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Long tagValue;
+	private String tagValue;
 	
 	public CarParking() {}
 	
-	public CarParking(Integer id, Long tagValue) {
+	public CarParking(Integer id, String tagValue) {
 		this.id = id;
 		this.tagValue = tagValue;
 	}
@@ -36,12 +36,12 @@ public class CarParking implements Car {
 	}
 
 	@Override
-	public Long getTagValue() {
+	public String getTagValue() {
 		return this.tagValue;
 	}
 
 	@Override
-	public void setTagValue(Long tagValue) {
+	public void setTagValue(String tagValue) {
 		this.tagValue = tagValue;
 	}
 
