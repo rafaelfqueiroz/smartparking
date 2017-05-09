@@ -42,4 +42,16 @@ public class ParkingLotController {
 		List<ParkingLot> lots = parkingRepository.findByState(false);
 		return new ResponseEntity<>(lots, HttpStatus.OK);
 	}
+	
+	@GetMapping(value="/pupulate")
+	
+	public ResponseEntity<List<ParkingLot>> populateParking() {
+		parkingRepository.save(new ParkingLot(1, false));
+		parkingRepository.save(new ParkingLot(2, false));
+		parkingRepository.save(new ParkingLot(3, false));
+		parkingRepository.save(new ParkingLot(4, false));
+		parkingRepository.save(new ParkingLot(5, false));
+		
+		return getAllParkingLot();
+	}
 }
