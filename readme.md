@@ -41,7 +41,7 @@ The body of the request must be:
 ```
 
 See oficial documentation at:
-[](http://)
+[Full documentation](https://github.com/rafaelfqueiroz/smartparking/blob/master/docs/html5/smartparking.html)
 
 
 
