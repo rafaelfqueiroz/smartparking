@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.smartparking.enums.StateTypes;
 import com.smartparking.interfaces.Feed;
 
 @Entity
@@ -18,11 +19,18 @@ public class ParkingLot implements Feed {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Integer number;
-	private Boolean state;
+	
+	/**
+	 * 0 - FREE
+	 * 1 - RESERVED
+	 * 2 - OCCUPIED
+	 * @see StateTypes
+	 */
+	private Integer state;
 	
 	public ParkingLot() {}
 	
-	public ParkingLot(Integer number, Boolean state) {
+	public ParkingLot(Integer number, Integer state) {
 		this.number = number;
 		this.state = state;
 	}
@@ -40,10 +48,10 @@ public class ParkingLot implements Feed {
 		this.number = number;
 	}
 	
-	public Boolean getState() {
+	public Integer getState() {
 		return this.state;
 	}
-	public void setState(Boolean state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 	
@@ -69,6 +77,18 @@ public class ParkingLot implements Feed {
 		} else if (!number.equals(other.number))
 			return false;
 		return true;
+	}
+	
+	public boolean isFree() {
+		return getState() == StateTypes.FREE.ordinal();
+	}
+	
+	public boolean isReserved() {
+		return getState() == StateTypes.RESERVED.ordinal();
+	}
+	
+	public boolean isOccupied() {
+		return getState() == StateTypes.OCCUPIED.ordinal();
 	}
 	
 }

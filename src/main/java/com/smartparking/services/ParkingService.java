@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.smartparking.domain.ParkingLot;
+import com.smartparking.enums.StateTypes;
 
 @Service
 public class ParkingService {
@@ -16,11 +17,11 @@ public class ParkingService {
 	public ParkingService() {
 		this.vacancies = Arrays.asList(
 				new ParkingLot[]{
-					new ParkingLot(1, false),
-					new ParkingLot(2, false),
-					new ParkingLot(3, false),
-					new ParkingLot(4, false),
-					new ParkingLot(5, false)
+					new ParkingLot(1, StateTypes.FREE.ordinal()),
+					new ParkingLot(2, StateTypes.FREE.ordinal()),
+					new ParkingLot(3, StateTypes.FREE.ordinal()),
+					new ParkingLot(4, StateTypes.FREE.ordinal()),
+					new ParkingLot(5, StateTypes.FREE.ordinal())
 				});
 	}
 

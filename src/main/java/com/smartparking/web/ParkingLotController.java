@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smartparking.domain.ParkingLot;
+import com.smartparking.enums.StateTypes;
 import com.smartparking.repositories.ParkingLotRepository;
 import com.smartparking.services.ParkingService;
 
@@ -26,33 +27,33 @@ public class ParkingLotController {
 	private ParkingLotRepository parkingRepository;
 	
 	@PostMapping(value="/occupy")
-	public ResponseEntity<ParkingLot> occupy(@RequestBody ParkingLot parkingLot) {
-		ParkingLot lot = parking.occupyParkingLot(parkingLot); 
-				//parkingRepository.findByNumber(parkingLot.getNumber());
+	public ResponseEntity<ParkingLot> changeParkingLotState(@RequestBody ParkingLot parkingLot) {
+		ParkingLot lot = parkingRepository.findByNumber(parkingLot.getNumber());
+		// parking.occupyParkingLot(parkingLot);
 		if (lot == null) {
 			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
 		}
 		
 		lot.setState(parkingLot.getState());
-		//parkingRepository.save(lot);
+		parkingRepository.save(lot);
 		return new ResponseEntity<>(lot, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/lots")
 	public ResponseEntity<List<ParkingLot>> getAllParkingLot() {
-		List<ParkingLot> lots = parking.getParkingLots(); 
-				//parkingRepository.findByState(false);
+		List<ParkingLot> lots = (List<ParkingLot>) parkingRepository.findAll();
+		//parking.getParkingLots();
 		return new ResponseEntity<>(lots, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/pupulate")
 	
 	public ResponseEntity<List<ParkingLot>> populateParking() {
-		parkingRepository.save(new ParkingLot(1, false));
-		parkingRepository.save(new ParkingLot(2, false));
-		parkingRepository.save(new ParkingLot(3, false));
-		parkingRepository.save(new ParkingLot(4, false));
-		parkingRepository.save(new ParkingLot(5, false));
+		parkingRepository.save(new ParkingLot(1, StateTypes.FREE.ordinal()));
+		parkingRepository.save(new ParkingLot(2, StateTypes.FREE.ordinal()));
+		parkingRepository.save(new ParkingLot(3, StateTypes.FREE.ordinal()));
+		parkingRepository.save(new ParkingLot(4, StateTypes.FREE.ordinal()));
+		parkingRepository.save(new ParkingLot(5, StateTypes.FREE.ordinal()));
 		
 		return getAllParkingLot();
 	}
