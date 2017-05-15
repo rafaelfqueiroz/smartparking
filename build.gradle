@@ -8,19 +8,38 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
+	
+}
+
+plugins { 
+	id "org.asciidoctor.convert" version "1.5.3"
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'org.asciidoctor.convert'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+asciidoctorj {
+    version = '1.5.4'
+}
+
+asciidoctor { 
+	sourceDir = file('src/main/resources/com/smartparking/documentation')
+	outputDir = file('docs')
+	resources { 
+		from(sourceDir) { 
+			include '*.png'
+		}
+	}
+}
+
 repositories {
 	mavenCentral()
 }
-
 
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter")
@@ -30,5 +49,8 @@ dependencies {
 	//databases dependencies
 	compile("org.postgresql:postgresql")
 	compile("org.hsqldb:hsqldb")
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	asciidoctor("org.asciidoctor:asciidoctorj:1.5.4")
+	
+	testCompile("org.springframework.boot:spring-boot-starter-test")
 }
