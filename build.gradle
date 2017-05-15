@@ -31,9 +31,7 @@ asciidoctor {
 	sourceDir = file('src/main/resources/com/smartparking/documentation')
 	outputDir = file('docs')
 	resources { 
-		from(sourceDir) { 
-			include '*.png'
-		}
+		from(sourceDir)
 	}
 }
 
