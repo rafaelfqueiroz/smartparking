@@ -1,16 +1,16 @@
 
-#Smart Parking IoT - Solution
+# Smart Parking IoT - Solution
 
 This is a documentation about an Internet of Things system for smart parking.
 
-##Introduction
+## Introduction
 
 The Smart Parking IoT is a system that proposes a solution for parkings. 
 Its aim is designate a free parking lot for a car comming. The Smart Parking 
 IoT sends the chosen parking lot to the car driver smartphone and opens the gate.
 Thus, the driver can go directly to the parking lot designated for him.
 
-== Web Service
+## Web Service
 
 This section describes how you can make HTTP requests for the web service.
 When a car comes, its necessary notificate the web service. 
@@ -40,8 +40,8 @@ The body of the request must be:
  }
 ```
 
-See oficial documentation at:
-[](http://)
+See oficial documentation at
+[full documentation](https://github.com/rafaelfqueiroz/smartparking/blob/master/docs/html5/smartparking.adoc)
 
 
 
