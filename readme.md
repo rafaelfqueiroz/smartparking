@@ -40,8 +40,8 @@ The body of the request must be:
  }
 ```
 
-See oficial documentation at:
-[Full documentation](https://github.com/rafaelfqueiroz/smartparking/blob/master/docs/html5/smartparking.html)
+See oficial documentation at
+[full documentation](https://github.com/rafaelfqueiroz/smartparking/blob/master/docs/html5/smartparking.adoc)
 
 
 
