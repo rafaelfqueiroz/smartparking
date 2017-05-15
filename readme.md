@@ -41,7 +41,7 @@ The body of the request must be:
 ```
 
 See documentation .adoc file at
-[full documentation at ](https://github.com/rafaelfqueiroz/smartparking/tree/master/docs/html5)
+[full documentation](https://github.com/rafaelfqueiroz/smartparking/tree/master/docs/html5)
 
 
 
