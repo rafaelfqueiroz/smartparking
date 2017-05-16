@@ -53,6 +53,8 @@ public class EntranceController {
 		if (lot == null) {
 			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
 		}
+		lot.setState(StateTypes.RESERVED.ordinal());
+		parkingRepository.save(lot);
 		notifier.notifyEntrance(lot);
 		return new ResponseEntity<>(lot, HttpStatus.OK);
 	}
