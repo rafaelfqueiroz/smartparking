@@ -46,15 +46,12 @@ public class ParkingLotController {
 		return new ResponseEntity<>(lots, HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/pupulate")
-	
-	public ResponseEntity<List<ParkingLot>> populateParking() {
+	@GetMapping(value="/populate")
+	public void populateParking() {
 		parkingRepository.save(new ParkingLot(1, StateTypes.FREE.ordinal()));
 		parkingRepository.save(new ParkingLot(2, StateTypes.FREE.ordinal()));
 		parkingRepository.save(new ParkingLot(3, StateTypes.FREE.ordinal()));
 		parkingRepository.save(new ParkingLot(4, StateTypes.FREE.ordinal()));
 		parkingRepository.save(new ParkingLot(5, StateTypes.FREE.ordinal()));
-		
-		return getAllParkingLot();
 	}
 }
