@@ -1,4 +1,4 @@
-package com.smartparking.web;
+package com.smartparking.controllers.rest;
 
 import java.util.List;
 

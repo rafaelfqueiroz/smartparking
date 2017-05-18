@@ -1,4 +1,4 @@
-package com.smartparking.web;
+package com.smartparking.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.smartparking.domain.User;
 import com.smartparking.services.UserService;
-import com.smartphone.vo.UserVO;
+import com.smartparking.vo.UserVO;
 
 @RestController
 @RequestMapping(value="/user")

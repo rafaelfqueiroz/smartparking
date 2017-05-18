@@ -1,4 +1,4 @@
-package com.smartparking.web;
+package com.smartparking.controllers.rest;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,13 +49,12 @@ public class EntranceController {
 	public ResponseEntity<ParkingLot> entrance(@RequestBody CarParking car) throws Exception {
 		log.add("Chegou: " + car.getTagValue() + " / " + new Date());
 		ParkingLot lot = parkingRepository.findFirstByState(StateTypes.FREE.ordinal());
-				//parking.getFreeParkingLot();
 		if (lot == null) {
 			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
 		}
 		lot.setState(StateTypes.RESERVED.ordinal());
 		parkingRepository.save(lot);
-		notifier.notifyEntrance(lot);
+		notifier.notify(lot);
 		return new ResponseEntity<>(lot, HttpStatus.OK);
 	}
 	
