@@ -1,7 +1,6 @@
 package com.smartparking.publishers;
 
 import java.net.URI;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -11,27 +10,25 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
-import com.smartparking.builders.MapBuilder;
-import com.smartparking.interfaces.Feed;
+import com.smartparking.vo.thingspeak.TSpeakCarParkingVO;
 
 @Component
-@SuppressWarnings("rawtypes")
-public class ThingSpeakPublisher extends Publisher {
+public class ThingSpeakPublisher extends Publisher<TSpeakCarParkingVO> {
 	
 	@Autowired
 	private AsyncRestTemplate asyncRestTemplate;
+	
 
 	public ThingSpeakPublisher(RestTemplate restTemplate) {
 		super(restTemplate);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void publish(Feed feed, String urlToPublish) {
+	public void publish(TSpeakCarParkingVO vo, String urlToPublish) {
 		HttpHeaders header = new HttpHeaders();
 		header.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<Map<String, String>> requestEntity = 
-				new HttpEntity<Map<String, String>>(getMapBuilder().build(feed), header);
+		HttpEntity<TSpeakCarParkingVO> requestEntity = 
+				new HttpEntity<TSpeakCarParkingVO>(vo, header);
 		try {
 			asyncRestTemplate.postForLocation(new URI(urlToPublish), requestEntity);
 			//getRestTemplate().postForLocation(new URI(urlToPublish), requestEntity);
