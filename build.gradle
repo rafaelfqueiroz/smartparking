@@ -40,7 +40,6 @@ repositories {
 }
 
 dependencies {
-	compile("com.ganyo:gcm-server:1.0.2")
 
 	compile("org.springframework.boot:spring-boot-starter")
 	compile("org.springframework.boot:spring-boot-starter-web")
