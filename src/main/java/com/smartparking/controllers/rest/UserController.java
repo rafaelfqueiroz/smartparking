@@ -26,6 +26,19 @@ public class UserController {
 	@PostMapping(value="/")
 	public ResponseEntity<UserVO> create(@RequestBody UserVO userVO) {
 		userService.save(new User(userVO));
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Verify if the user is authorized according with its login and password.
+	 */
+	@PostMapping(value="/auth")
+	public ResponseEntity<UserVO> authorized(@RequestBody UserVO userVO) {
+		User user = userService.findUserByLoginAndPassword(new User(userVO));
+		
+		if (user == null) {
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
@@ -39,4 +52,5 @@ public class UserController {
 		userService.updateToken(new User(userVO));
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
 }

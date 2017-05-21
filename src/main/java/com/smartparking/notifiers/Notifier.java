@@ -1,6 +1,6 @@
 package com.smartparking.notifiers;
 
-import com.smartparking.interfaces.Feed;
+import com.smartparking.domain.Feed;
 
 public interface Notifier {
 

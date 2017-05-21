@@ -14,9 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
-import com.smartparking.interfaces.Feed;
 import com.smartparking.vo.UserVO;
 
 @Entity
@@ -30,7 +28,7 @@ public class User implements Feed {
 	private Integer id;
 	
 	private String login;
-	private String senha;
+	private String password;
 	private String token;
 	
 	@CreationTimestamp
@@ -44,7 +42,7 @@ public class User implements Feed {
 	
 	public User(UserVO userVO) {
 		this.login = userVO.getLogin();
-		this.senha = userVO.getSenha();
+		this.password = userVO.getPassword();
 		this.token = userVO.getLogin();
 	}
 	
@@ -64,12 +62,12 @@ public class User implements Feed {
 		this.login = login;
 	}
 	
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 	
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getToken() {
 		return token;

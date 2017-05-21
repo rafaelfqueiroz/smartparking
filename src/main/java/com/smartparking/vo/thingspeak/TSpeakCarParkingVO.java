@@ -1,6 +1,8 @@
 package com.smartparking.vo.thingspeak;
 
-import com.smartparking.domain.CarParking;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.smartparking.vo.CarParkingVO;
 
 /**
@@ -9,24 +11,19 @@ import com.smartparking.vo.CarParkingVO;
  */
 public class TSpeakCarParkingVO extends CarParkingVO {
 
-	private String apiKey;
-	
+	private static final long serialVersionUID = -752564064267374059L;
+
 	public TSpeakCarParkingVO() {}
 	
 	public TSpeakCarParkingVO(String tagValue) {
 		super(tagValue);
 	}
 
-	public String getApiKey() {
-		return apiKey;
-	}
-
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-	
-	public static TSpeakCarParkingVO of(CarParking feed) {
-		return new TSpeakCarParkingVO(feed.getTagValue()); 
+	@Override
+	public Map<String, Object> parseToMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("field1", getTagValue());
+		return map;
 	}
 	
 }

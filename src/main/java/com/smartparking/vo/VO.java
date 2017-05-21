@@ -1,5 +1,9 @@
 package com.smartparking.vo;
 
-public interface VO {
+import java.io.Serializable;
+import java.util.Map;
 
+public interface VO extends Serializable {
+
+	Map<String, Object> parseToMap();
 }

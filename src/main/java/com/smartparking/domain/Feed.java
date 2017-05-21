@@ -1,7 +1,6 @@
-package com.smartparking.interfaces;
+package com.smartparking.domain;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public interface Feed extends Serializable{
 	

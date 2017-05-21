@@ -14,22 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.smartparking.domain.ParkingLot;
 import com.smartparking.enums.StateTypes;
 import com.smartparking.repositories.ParkingLotRepository;
-import com.smartparking.services.ParkingService;
 
 @RestController
 @RequestMapping(value="/parking")
 public class ParkingLotController {
 
 	@Autowired
-	private ParkingService parking;
-	
-	@Autowired
 	private ParkingLotRepository parkingRepository;
 	
 	@PostMapping(value="/occupy")
 	public ResponseEntity<ParkingLot> changeParkingLotState(@RequestBody ParkingLot parkingLot) {
 		ParkingLot lot = parkingRepository.findByNumber(parkingLot.getNumber());
-		// parking.occupyParkingLot(parkingLot);
 		if (lot == null) {
 			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
 		}

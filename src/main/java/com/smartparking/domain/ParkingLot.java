@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.smartparking.enums.StateTypes;
-import com.smartparking.interfaces.Feed;
 
 @Entity
 @Table(name="parking_lot")

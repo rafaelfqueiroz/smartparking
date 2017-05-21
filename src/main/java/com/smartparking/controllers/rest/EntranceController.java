@@ -18,7 +18,6 @@ import com.smartparking.domain.ParkingLot;
 import com.smartparking.enums.StateTypes;
 import com.smartparking.notifiers.Notifier;
 import com.smartparking.repositories.ParkingLotRepository;
-import com.smartparking.services.ParkingService;
 
 /**
  * @author Rafael Queiroz
@@ -28,9 +27,6 @@ import com.smartparking.services.ParkingService;
 public class EntranceController {
 	
 	private List<String> log = new ArrayList<String>();
-	
-	@Autowired
-	private ParkingService parking;
 	
 	@Autowired
 	private ParkingLotRepository parkingRepository;
