@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartparking.domain.CarParking;
 import com.smartparking.domain.ParkingLot;
 import com.smartparking.enums.StateTypes;
 import com.smartparking.notifiers.Notifier;
 import com.smartparking.repositories.ParkingLotRepository;
+import com.smartparking.vo.CarParkingVO;
+import com.smartparking.vo.ParkingLotVO;
 
 /**
  * @author Rafael Queiroz
@@ -42,16 +43,16 @@ public class EntranceController {
 	 * @throws Exception
 	 */
 	@PostMapping(value="/car")
-	public ResponseEntity<ParkingLot> entrance(@RequestBody CarParking car) throws Exception {
+	public ResponseEntity<ParkingLotVO> entrance(@RequestBody CarParkingVO car) throws Exception {
 		log.add("Chegou: " + car.getTagValue() + " / " + new Date());
 		ParkingLot lot = parkingRepository.findFirstByState(StateTypes.FREE.ordinal());
 		if (lot == null) {
-			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		lot.setState(StateTypes.RESERVED.ordinal());
 		parkingRepository.save(lot);
 		notifier.notify(lot);
-		return new ResponseEntity<>(lot, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/logs")

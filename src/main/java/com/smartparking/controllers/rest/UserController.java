@@ -1,8 +1,6 @@
 package com.smartparking.controllers.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;import java.util.stream.Collector;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smartparking.domain.User;
-import com.smartparking.repositories.UserRepository;
 import com.smartparking.services.UserService;
 import com.smartparking.vo.UserVO;
 

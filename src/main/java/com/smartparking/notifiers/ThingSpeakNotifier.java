@@ -21,7 +21,7 @@ public class ThingSpeakNotifier implements Notifier {
 	
 	private static final String DEFAULT_THINSPEAK_URL = "https://api.thingspeak.com";
 	private static final String DEFAULT_GCM_URL = "https://fcm.googleapis.com/fcm/send";
-
+	
 	@Override
 	public void notify(Feed feed) {
 		CarParking car = (CarParking) feed;

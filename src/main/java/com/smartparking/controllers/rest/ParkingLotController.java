@@ -1,6 +1,7 @@
 package com.smartparking.controllers.rest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.smartparking.domain.ParkingLot;
 import com.smartparking.enums.StateTypes;
 import com.smartparking.repositories.ParkingLotRepository;
+import com.smartparking.vo.ParkingLotVO;
 
 @RestController
 @RequestMapping(value="/parking")
@@ -23,22 +25,23 @@ public class ParkingLotController {
 	private ParkingLotRepository parkingRepository;
 	
 	@PostMapping(value="/occupy")
-	public ResponseEntity<ParkingLot> changeParkingLotState(@RequestBody ParkingLot parkingLot) {
+	public ResponseEntity<ParkingLotVO> changeParkingLotState(@RequestBody ParkingLot parkingLot) {
 		ParkingLot lot = parkingRepository.findByNumber(parkingLot.getNumber());
 		if (lot == null) {
-			return new ResponseEntity<>(lot, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
 		lot.setState(parkingLot.getState());
 		parkingRepository.save(lot);
-		return new ResponseEntity<>(lot, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/lots")
-	public ResponseEntity<List<ParkingLot>> getAllParkingLot() {
+	public ResponseEntity<List<ParkingLotVO>> getAllParkingLot() {
 		List<ParkingLot> lots = (List<ParkingLot>) parkingRepository.findAll();
 		//parking.getParkingLots();
-		return new ResponseEntity<>(lots, HttpStatus.OK);
+		List<ParkingLotVO> lotsVO = lots.stream().map(pl -> ParkingLotVO.of(pl)).collect(Collectors.toList());
+		return new ResponseEntity<>(lotsVO, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/populate")
