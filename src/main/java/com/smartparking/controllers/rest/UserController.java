@@ -70,7 +70,7 @@ public class UserController {
 	 * Get all users
 	 */
 	@GetMapping(value="/")
-	public ResponseEntity<List<UserVO>> users(@PathVariable("id") Integer userId) {
+	public ResponseEntity<List<UserVO>> users() {
 		List<UserVO> usersVO = userService.findUsers()
 				.stream().map(UserVO::new).collect(Collectors.toList());
 		return new ResponseEntity<>(usersVO, HttpStatus.OK);
