@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.AsyncRestTemplate;
 
 import com.smartparking.vo.VO;
 
@@ -15,6 +16,8 @@ public class GCMPublisher extends Publisher {
 	private static final String APY_KEY = "key=AAAAi3ZNiCE:APA91bFzT8BIp8bYryk1zArQiLEwzJ6prgOEuanIsTbXFCFBzQphTkUzOGpssB-byKH5DRxBiVdvreXuoDyo0wO-SNj1czy39bvi9epqT4fQ9akwKmN7h0b39O3_e5BJuTrQOzLoVNBY";
 	private static final String CLIENT_KEY = "c8UdjuxSJkU:APA91bEf4Z3y7zG9psgREEHSw95We2aCK9l-XHQ_l-CbxkjyJwRjUuuWy3kqZBJaZjgu55DZjJ8Ou4uUYl-_KrwfvXtDfBvUSL6kBvK4dZjhG_DRVIAqGis9DJkajt43fYN5drzHY_O5";
 	private String clientKey;
+	
+	private AsyncRestTemplate asyncRestTemplate = new AsyncRestTemplate();
 	
 	public GCMPublisher(String urlToPublish) {
 		super(urlToPublish);
@@ -37,7 +40,7 @@ public class GCMPublisher extends Publisher {
 		HttpEntity<Map<String, Object>> requestEntity = 
 				new HttpEntity<Map<String, Object>>(map, header);
 		try {
-			getAsyncRestTemplate().postForLocation(new URI(urlToPublish), requestEntity);
+			asyncRestTemplate.postForLocation(new URI(urlToPublish), requestEntity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
