@@ -34,8 +34,9 @@ public class ThingSpeakNotifier implements Notifier {
 		//VO cpVO = new CarParkingVO(car.getTagValue());
 		VO lotVO = new ParkingLotVO(lot.getNumber(), lot.getState());
 		GCMPublisher gcmP = new GCMPublisher(DEFAULT_GCM_URL);
+		//gcmP.setClientKey(userService.findUserTokenFromCar());
 		gcmP.publish(lotVO);
-		//gcmP.setClientKey(userService.findUserTokenFromCar(car));
+		
 		//gcmP.publish(cpVO);
 		
 		VO tsVO = new TSpeakParkingLotVO(lot.getNumber(), lot.getState()); 

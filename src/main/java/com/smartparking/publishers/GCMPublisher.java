@@ -12,8 +12,8 @@ import com.smartparking.vo.VO;
 
 public class GCMPublisher extends Publisher {
 	
-	private static final String APY_KEY = "key=AIzaSyCZy2efY1j8A3QmTm79OjJFcVyUfcqN9GM";
-	//private static final String CLIENT_KEY = "c8UdjuxSJkU:APA91bEf4Z3y7zG9psgREEHSw95We2aCK9l-XHQ_l-CbxkjyJwRjUuuWy3kqZBJaZjgu55DZjJ8Ou4uUYl-_KrwfvXtDfBvUSL6kBvK4dZjhG_DRVIAqGis9DJkajt43fYN5drzHY_O5";
+	private static final String APY_KEY = "key=AAAAi3ZNiCE:APA91bFzT8BIp8bYryk1zArQiLEwzJ6prgOEuanIsTbXFCFBzQphTkUzOGpssB-byKH5DRxBiVdvreXuoDyo0wO-SNj1czy39bvi9epqT4fQ9akwKmN7h0b39O3_e5BJuTrQOzLoVNBY";
+	private static final String CLIENT_KEY = "c8UdjuxSJkU:APA91bEf4Z3y7zG9psgREEHSw95We2aCK9l-XHQ_l-CbxkjyJwRjUuuWy3kqZBJaZjgu55DZjJ8Ou4uUYl-_KrwfvXtDfBvUSL6kBvK4dZjhG_DRVIAqGis9DJkajt43fYN5drzHY_O5";
 	private String clientKey;
 	
 	public GCMPublisher(String urlToPublish) {
@@ -32,7 +32,7 @@ public class GCMPublisher extends Publisher {
 		*/
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("to", getClientKey());
+		map.put("to", CLIENT_KEY);
 		map.put("data", vo.parseToMap());
 		HttpEntity<Map<String, Object>> requestEntity = 
 				new HttpEntity<Map<String, Object>>(map, header);
