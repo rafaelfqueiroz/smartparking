@@ -40,6 +40,8 @@ public class User implements Feed {
 	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<CarParking> cars;
 	
+	public User() {	}
+	
 	public User(UserVO userVO) {
 		this.login = userVO.getLogin();
 		this.password = userVO.getPassword();
