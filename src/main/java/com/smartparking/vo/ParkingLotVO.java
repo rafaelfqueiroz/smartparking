@@ -16,6 +16,15 @@ public class ParkingLotVO implements VO {
 	public Integer getNumber() {
 		return number;
 	}
+	
+	public ParkingLotVO() {
+		
+	}
+	
+	public ParkingLotVO(Integer number, Integer state) {
+		this.number = number;
+		this.state = state;
+	}
 
 	public void setNumber(Integer number) {
 		this.number = number;
@@ -30,10 +39,7 @@ public class ParkingLotVO implements VO {
 	}
 	
 	public static ParkingLotVO of(ParkingLot pl) {
-		ParkingLotVO vo = new ParkingLotVO();
-		vo.setNumber(pl.getNumber());
-		vo.setState(pl.getState());
-		return vo;
+		return new ParkingLotVO(pl.getNumber(), pl.getState());
 	}
 
 	@Override
