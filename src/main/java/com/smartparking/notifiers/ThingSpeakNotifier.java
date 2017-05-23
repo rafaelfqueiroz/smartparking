@@ -8,6 +8,7 @@ import com.smartparking.domain.ParkingLot;
 import com.smartparking.publishers.GCMPublisher;
 import com.smartparking.publishers.ThingSpeakPublisher;
 import com.smartparking.services.UserService;
+import com.smartparking.vo.ParkingLotVO;
 import com.smartparking.vo.VO;
 import com.smartparking.vo.thingspeak.TSpeakApiKeyVODecorator;
 import com.smartparking.vo.thingspeak.TSpeakParkingLotVO;
@@ -31,7 +32,9 @@ public class ThingSpeakNotifier implements Notifier {
 		ParkingLot lot = (ParkingLot) feed;
 		
 		//VO cpVO = new CarParkingVO(car.getTagValue());
+		VO lotVO = new ParkingLotVO(lot.getNumber(), lot.getState());
 		GCMPublisher gcmP = new GCMPublisher(DEFAULT_GCM_URL);
+		gcmP.publish(lotVO);
 		//gcmP.setClientKey(userService.findUserTokenFromCar(car));
 		//gcmP.publish(cpVO);
 		

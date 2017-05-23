@@ -15,7 +15,7 @@ public class TSpeakApiKeyVODecorator implements VO {
 
 	private VO decorateVO;
 	
-	private String apiKey;
+	private String apiKey = "EXA9HEOBB27FV1HN";
 	
 	public TSpeakApiKeyVODecorator(VO decorateVO) {
 		this.decorateVO = decorateVO;

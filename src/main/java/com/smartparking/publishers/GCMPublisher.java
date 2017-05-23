@@ -13,7 +13,7 @@ import com.smartparking.vo.VO;
 public class GCMPublisher extends Publisher {
 	
 	private static final String APY_KEY = "key=AIzaSyCZy2efY1j8A3QmTm79OjJFcVyUfcqN9GM";
-	//private static final String CLIENT_KEY = "c5RnO00EqV0:APA91bF1RKmyoPmouKHyg400V8JymPf2xEkdHDjl2gnUcHTwizMC9zqCDmsXO_XSceUSEt-zqHk0e9bEeAPgneCfAZuhvLnSz_U96vJRKfbkxhvvruqSvKX7kDp7X1CzAyUFqz17yeMu";
+	//private static final String CLIENT_KEY = "c8UdjuxSJkU:APA91bEf4Z3y7zG9psgREEHSw95We2aCK9l-XHQ_l-CbxkjyJwRjUuuWy3kqZBJaZjgu55DZjJ8Ou4uUYl-_KrwfvXtDfBvUSL6kBvK4dZjhG_DRVIAqGis9DJkajt43fYN5drzHY_O5";
 	private String clientKey;
 	
 	public GCMPublisher(String urlToPublish) {

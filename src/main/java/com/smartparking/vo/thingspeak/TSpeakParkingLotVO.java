@@ -19,6 +19,8 @@ public class TSpeakParkingLotVO extends ParkingLotVO {
 	@Override
 	public Map<String, Object> parseToMap() {
 		Map<String, Object> map = super.parseToMap();
+		map.put("field1", getNumber());
+		map.put("field2", getState());
 		map.put("api_key", apiKey);
 		return map;
 	}
