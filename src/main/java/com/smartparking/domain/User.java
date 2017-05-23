@@ -37,15 +37,19 @@ public class User implements Feed {
 	@UpdateTimestamp
 	private Date updatedAt;
 	
-	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<CarParking> cars;
 	
 	public User() {	}
 	
 	public User(UserVO userVO) {
-		this.login = userVO.getLogin();
-		this.password = userVO.getPassword();
-		this.token = userVO.getLogin();
+		this(userVO.getLogin(), userVO.getPassword(), userVO.getLogin());
+	}
+	
+	public User(String login, String password, String token) {
+		this.login = login;
+		this.password = password;
+		this.token = token;
 	}
 	
 	public Integer getId() {

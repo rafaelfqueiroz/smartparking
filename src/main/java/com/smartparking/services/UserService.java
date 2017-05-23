@@ -1,12 +1,12 @@
 package com.smartparking.services;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smartparking.domain.CarParking;
 import com.smartparking.domain.User;
 import com.smartparking.repositories.UserRepository;
 
@@ -42,5 +42,10 @@ public class UserService {
 		}
 		User user = userRepository.findOne(userId);
 		return user;
+	}
+
+	public String findUserTokenFromCar(CarParking car) {
+		User user = userRepository.findUserByCar(car);
+		return user.getToken();
 	}
 }

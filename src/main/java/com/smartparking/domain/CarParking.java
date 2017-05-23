@@ -20,13 +20,13 @@ public class CarParking implements Feed {
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
-	private User usuario;
+	private User user;
 	
 	public CarParking() {}
 	
-	public CarParking(Integer id, String tagValue) {
-		this.id = id;
+	public CarParking(String tagValue, User user) {
 		this.tagValue = tagValue;
+		this.user = user;
 	}
 
 	@Override
@@ -47,4 +47,12 @@ public class CarParking implements Feed {
 		this.tagValue = tagValue;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }

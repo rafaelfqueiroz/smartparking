@@ -13,7 +13,8 @@ import com.smartparking.vo.VO;
 public class GCMPublisher extends Publisher {
 	
 	private static final String APY_KEY = "key=AIzaSyCZy2efY1j8A3QmTm79OjJFcVyUfcqN9GM";
-	private static final String CLIENT_KEY = "c5RnO00EqV0:APA91bF1RKmyoPmouKHyg400V8JymPf2xEkdHDjl2gnUcHTwizMC9zqCDmsXO_XSceUSEt-zqHk0e9bEeAPgneCfAZuhvLnSz_U96vJRKfbkxhvvruqSvKX7kDp7X1CzAyUFqz17yeMu";
+	//private static final String CLIENT_KEY = "c5RnO00EqV0:APA91bF1RKmyoPmouKHyg400V8JymPf2xEkdHDjl2gnUcHTwizMC9zqCDmsXO_XSceUSEt-zqHk0e9bEeAPgneCfAZuhvLnSz_U96vJRKfbkxhvvruqSvKX7kDp7X1CzAyUFqz17yeMu";
+	private String clientKey;
 	
 	public GCMPublisher(String urlToPublish) {
 		super(urlToPublish);
@@ -31,7 +32,7 @@ public class GCMPublisher extends Publisher {
 		*/
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("to", CLIENT_KEY);
+		map.put("to", getClientKey());
 		map.put("data", vo.parseToMap());
 		HttpEntity<Map<String, Object>> requestEntity = 
 				new HttpEntity<Map<String, Object>>(map, header);
@@ -40,6 +41,14 @@ public class GCMPublisher extends Publisher {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getClientKey() {
+		return clientKey;
+	}
+
+	public void setClientKey(String clientKey) {
+		this.clientKey = clientKey;
 	}
 
 }
