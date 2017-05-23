@@ -1,5 +1,8 @@
 package com.smartparking.services;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,5 +30,17 @@ public class UserService {
 
 	public User findUserByLoginAndPassword(User user) {
 		return userRepository.findByLoginAndPassword(user.getLogin(), user.getPassword());
+	}
+
+	public List<User> findUsers() {
+		return (List<User>) userRepository.findAll();
+	}
+
+	public User findUser(Integer userId) {
+		if (userId == null) {
+			return null;
+		}
+		User user = userRepository.findOne(userId);
+		return user;
 	}
 }

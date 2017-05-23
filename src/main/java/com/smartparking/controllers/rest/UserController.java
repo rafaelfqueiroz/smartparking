@@ -1,8 +1,15 @@
 package com.smartparking.controllers.rest;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smartparking.domain.User;
+import com.smartparking.repositories.UserRepository;
 import com.smartparking.services.UserService;
 import com.smartparking.vo.UserVO;
 
@@ -53,4 +61,23 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	/**
+	 * Get all users
+	 */
+	@GetMapping(value="/")
+	public ResponseEntity<List<UserVO>> users(@PathVariable("id") Integer userId) {
+		List<UserVO> usersVO = userService.findUsers()
+				.stream().map(UserVO::new).collect(Collectors.toList());
+		return new ResponseEntity<>(usersVO, HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(value="/{id}")
+	public ResponseEntity<UserVO> user(@PathVariable("id") Integer userId) {
+		User user = userService.findUser(userId);
+		if (user == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(new UserVO(user), HttpStatus.OK);
+	}
 }

@@ -15,6 +15,12 @@ public class UserVO implements VO{
 	
 	public UserVO() {}
 	
+	public UserVO(User user) {
+		this.login = user.getLogin();
+		this.password = user.getPassword();
+		this.token = user.getToken();
+	}
+	
 	public UserVO(String login, String password, String token) {
 		this.login = login;
 		this.password = password;
