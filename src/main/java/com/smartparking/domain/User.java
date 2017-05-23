@@ -43,7 +43,7 @@ public class User implements Feed {
 	public User() {	}
 	
 	public User(UserVO userVO) {
-		this(userVO.getLogin(), userVO.getPassword(), userVO.getLogin());
+		this(userVO.getLogin(), userVO.getPassword(), userVO.getToken());
 	}
 	
 	public User(String login, String password, String token) {
