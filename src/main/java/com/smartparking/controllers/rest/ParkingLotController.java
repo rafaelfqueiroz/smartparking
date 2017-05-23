@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartparking.domain.CarParking;
 import com.smartparking.domain.ParkingLot;
-import com.smartparking.domain.User;
 import com.smartparking.enums.StateTypes;
-import com.smartparking.repositories.CarParkingRepository;
 import com.smartparking.repositories.ParkingLotRepository;
-import com.smartparking.repositories.UserRepository;
 import com.smartparking.vo.ParkingLotVO;
 
 @RestController
@@ -27,10 +23,7 @@ public class ParkingLotController {
 
 	@Autowired
 	private ParkingLotRepository parkingRepository;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private CarParkingRepository carParkingRepository;
+	
 	
 	@PostMapping(value="/occupy")
 	public ResponseEntity<ParkingLotVO> changeParkingLotState(@RequestBody ParkingLot parkingLot) {
@@ -53,10 +46,6 @@ public class ParkingLotController {
 	
 	@GetMapping(value="/populate")
 	public void populateParking() {
-		User user = userRepository.save(new User("teste", "teste", ""));
-		
-		carParkingRepository.save(new CarParking("3000000000000000000000007549", user));
-		
 		parkingRepository.save(new ParkingLot(1, StateTypes.FREE.ordinal()));
 		parkingRepository.save(new ParkingLot(2, StateTypes.FREE.ordinal()));
 		parkingRepository.save(new ParkingLot(3, StateTypes.FREE.ordinal()));

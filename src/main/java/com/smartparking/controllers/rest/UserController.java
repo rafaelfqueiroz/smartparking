@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smartparking.domain.CarParking;
 import com.smartparking.domain.User;
+import com.smartparking.repositories.CarParkingRepository;
+import com.smartparking.repositories.UserRepository;
 import com.smartparking.services.UserService;
 import com.smartparking.vo.UserVO;
 
@@ -24,6 +27,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private CarParkingRepository carParkingRepository;
 	
 	/*
 	 * Creates a new user
@@ -76,5 +84,11 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(new UserVO(user), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/populate")
+	public void populateParking() {
+		User user = userRepository.save(new User("teste", "teste", ""));
+		carParkingRepository.save(new CarParking("3000000000000000000000007549", user));
 	}
 }
