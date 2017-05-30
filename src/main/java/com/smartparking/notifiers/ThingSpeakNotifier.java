@@ -3,10 +3,15 @@ package com.smartparking.notifiers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smartparking.domain.CarParking;
 import com.smartparking.domain.Feed;
 import com.smartparking.domain.ParkingLot;
+import com.smartparking.enums.StateTypes;
+import com.smartparking.exceptions.CarNotRegisteredException;
 import com.smartparking.publishers.GCMPublisher;
 import com.smartparking.publishers.ThingSpeakPublisher;
+import com.smartparking.repositories.CarParkingRepository;
+import com.smartparking.repositories.ParkingLotRepository;
 import com.smartparking.services.UserService;
 import com.smartparking.vo.ParkingLotVO;
 import com.smartparking.vo.VO;
@@ -27,20 +32,38 @@ public class ThingSpeakNotifier implements Notifier {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ParkingLotRepository parkingRepository;
+	
+	@Autowired
+	private CarParkingRepository carParkingRepository;
+	
 	@Override
-	public void notify(Feed feed) {
-		ParkingLot lot = (ParkingLot) feed;
+	public void notify(Feed feed) throws CarNotRegisteredException {
+
+		CarParking car = (CarParking) feed;
+		car = carParkingRepository.findByTagValue(car.getTagValue());
 		
-		//VO cpVO = new CarParkingVO(car.getTagValue());
-		VO lotVO = new ParkingLotVO(lot.getNumber(), lot.getState());
+		if (car == null) {
+			throw new CarNotRegisteredException();
+		}
+		
+		String userToken = userService.findUserTokenFromCar(car);
+		
+		ParkingLot lot = parkingRepository.findFirstByState(StateTypes.FREE.ordinal());
+		lot.setState(StateTypes.RESERVED.ordinal());
+		parkingRepository.save(lot);
+		
+		VO lotVO = null;
+		if (lot != null) {
+			lotVO = new ParkingLotVO(lot.getNumber(), lot.getState());
+			
+			VO tsVO = new TSpeakParkingLotVO(lot.getNumber(), lot.getState()); 
+			new ThingSpeakPublisher(DEFAULT_THINSPEAK_URL + "/update").publish(new TSpeakApiKeyVODecorator(tsVO));
+		}
+
 		GCMPublisher gcmP = new GCMPublisher(DEFAULT_GCM_URL);
-		//gcmP.setClientKey(userService.findUserTokenFromCar());
+		gcmP.setClientKey(userToken);
 		gcmP.publish(lotVO);
-		
-		//gcmP.publish(cpVO);
-		
-		VO tsVO = new TSpeakParkingLotVO(lot.getNumber(), lot.getState()); 
-		//new TSpeakCarParkingVO(car.getTagValue());
-		new ThingSpeakPublisher(DEFAULT_THINSPEAK_URL + "/update").publish(new TSpeakApiKeyVODecorator(tsVO));
 	}
 }

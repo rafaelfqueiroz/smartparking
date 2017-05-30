@@ -35,8 +35,8 @@ public class GCMPublisher extends Publisher {
 		*/
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("to", CLIENT_KEY);
-		map.put("data", vo.parseToMap());
+		map.put("to", getClientKey() != null ? getClientKey() : CLIENT_KEY);
+		map.put("data", vo != null ? vo.parseToMap() : "Nenhuma vaga encontrada.");
 		HttpEntity<Map<String, Object>> requestEntity = 
 				new HttpEntity<Map<String, Object>>(map, header);
 		try {

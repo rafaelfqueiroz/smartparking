@@ -1,7 +1,6 @@
 package com.smartparking.controllers.rest;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartparking.domain.ParkingLot;
-import com.smartparking.enums.StateTypes;
+import com.smartparking.domain.CarParking;
 import com.smartparking.notifiers.Notifier;
-import com.smartparking.repositories.ParkingLotRepository;
 import com.smartparking.vo.CarParkingVO;
 import com.smartparking.vo.ParkingLotVO;
 
@@ -30,9 +27,6 @@ public class EntranceController {
 	private List<String> log = new ArrayList<String>();
 	
 	@Autowired
-	private ParkingLotRepository parkingRepository;
-	
-	@Autowired
 	private Notifier notifier;
 	
 	/**
@@ -43,16 +37,14 @@ public class EntranceController {
 	 * @throws Exception
 	 */
 	@PostMapping(value="/car")
-	public ResponseEntity<ParkingLotVO> entrance(@RequestBody CarParkingVO car) throws Exception {
-		log.add("Chegou: " + car.getTagValue() + " / " + new Date());
-		ParkingLot lot = parkingRepository.findFirstByState(StateTypes.FREE.ordinal());
-		if (lot == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<ParkingLotVO> entrance(@RequestBody CarParkingVO car) {
+		//notifies when a cars comes
+		try {
+			notifier.notify(new CarParking(car.getTagValue()));
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception ex){
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		lot.setState(StateTypes.RESERVED.ordinal());
-		parkingRepository.save(lot);
-		notifier.notify(lot);
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/logs")

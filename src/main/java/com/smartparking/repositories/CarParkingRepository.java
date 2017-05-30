@@ -8,4 +8,6 @@ import com.smartparking.domain.CarParking;
 @Repository
 public interface CarParkingRepository extends CrudRepository<CarParking, Integer> {
 
+	CarParking findByTagValue(String tagValue);
+
 }

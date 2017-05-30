@@ -24,6 +24,10 @@ public class CarParking implements Feed {
 	
 	public CarParking() {}
 	
+	public CarParking(String tagValue) {
+		this.tagValue = tagValue;
+	}
+	
 	public CarParking(String tagValue, User user) {
 		this.tagValue = tagValue;
 		this.user = user;
