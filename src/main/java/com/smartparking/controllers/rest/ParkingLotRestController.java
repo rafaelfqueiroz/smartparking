@@ -15,14 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.smartparking.domain.ParkingLot;
 import com.smartparking.enums.StateTypes;
 import com.smartparking.repositories.ParkingLotRepository;
+import com.smartparking.services.ParkingService;
 import com.smartparking.vo.ParkingLotVO;
 
 @RestController
 @RequestMapping(value="/parking")
-public class ParkingLotController {
+public class ParkingLotRestController {
 
 	@Autowired
 	private ParkingLotRepository parkingRepository;
+	
+	@Autowired
+	private ParkingService parkingLotService;
 	
 	
 	@PostMapping(value="/occupy")
@@ -42,6 +46,13 @@ public class ParkingLotController {
 		List<ParkingLot> lots = (List<ParkingLot>) parkingRepository.findAll();
 		List<ParkingLotVO> lotsVO = lots.stream().map(pl -> ParkingLotVO.of(pl)).collect(Collectors.toList());
 		return new ResponseEntity<>(lotsVO, HttpStatus.OK);
+	}
+	
+	@GetMapping("/new")
+	public ResponseEntity<ParkingLotVO> addParkingLot() {
+		ParkingLot lot = parkingLotService.createParkingLot();
+		ParkingLotVO vo = ParkingLotVO.of(lot);
+		return new ResponseEntity<>(vo, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/populate")

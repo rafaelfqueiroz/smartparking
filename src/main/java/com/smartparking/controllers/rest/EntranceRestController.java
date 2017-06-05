@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartparking.domain.CarParking;
+import com.smartparking.domain.Car;
 import com.smartparking.notifiers.Notifier;
-import com.smartparking.vo.CarParkingVO;
+import com.smartparking.vo.CarVO;
 import com.smartparking.vo.ParkingLotVO;
 
 /**
@@ -22,7 +22,7 @@ import com.smartparking.vo.ParkingLotVO;
  */
 @RestController
 @RequestMapping(value="/entrance")
-public class EntranceController {
+public class EntranceRestController {
 	
 	private List<String> log = new ArrayList<String>();
 	
@@ -37,10 +37,10 @@ public class EntranceController {
 	 * @throws Exception
 	 */
 	@PostMapping(value="/car")
-	public ResponseEntity<ParkingLotVO> entrance(@RequestBody CarParkingVO car) {
+	public ResponseEntity<ParkingLotVO> entrance(@RequestBody CarVO car) {
 		//notifies when a cars comes
 		try {
-			notifier.notify(new CarParking(car.getTagValue()));
+			notifier.notify(new Car(car.getTagValue()));
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception ex){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

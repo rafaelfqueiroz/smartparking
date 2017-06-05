@@ -1,51 +1,36 @@
 package com.smartparking.services;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smartparking.domain.ParkingLot;
 import com.smartparking.enums.StateTypes;
+import com.smartparking.repositories.ParkingLotRepository;
 
 @Service
-public class ParkingService {
+public class ParkingService extends CrudService<ParkingLot>{
 
-	private List<ParkingLot> vacancies;
-
-	public ParkingService() {
-		this.vacancies = Arrays.asList(
-				new ParkingLot[]{
-					new ParkingLot(1, StateTypes.FREE.ordinal()),
-					new ParkingLot(2, StateTypes.FREE.ordinal()),
-					new ParkingLot(3, StateTypes.FREE.ordinal()),
-					new ParkingLot(4, StateTypes.FREE.ordinal()),
-					new ParkingLot(5, StateTypes.FREE.ordinal())
-				});
-	}
-
-	public ParkingLot occupyParkingLot(ParkingLot parkingLot) {
-		ParkingLot newState = vacancies.stream().filter(v -> v.equals(parkingLot))
-						  			.map(v -> {
-						  				v.setState(parkingLot.getState());
-						  				return v;
-						  			}).findFirst().get();
-		return newState;
-	}
+	@Autowired
+	private ParkingLotRepository parkingLotRepository;
 	
-	public ParkingLot getFreeParkingLot() throws Exception {
-		Optional<ParkingLot> opt = vacancies.stream()
-											.filter(v -> v.getState().equals(Boolean.FALSE))
-											.findAny();
-		if (!opt.isPresent()) {
-			throw new Exception("Não há vagas disponíveis");
+	@Override
+	public List<ParkingLot> getAll() {
+		return parkingLotRepository.findAllByActiveTrueOrderByNumber();
+	}
+
+	public ParkingLot createParkingLot() {
+		ParkingLot lot = parkingLotRepository.findTopByActiveTrueOrderByNumberDesc();
+		ParkingLot newest = new ParkingLot();
+		if (lot == null) {
+			newest.setNumber(1);
+		} else {
+			newest.setNumber(lot.getNumber() + 1);
 		}
-		return opt.get();
+		newest.setState(StateTypes.FREE.ordinal());
+		newest.setActive(true);
+		parkingLotRepository.save(newest);
+		return newest;
 	}
-
-	public List<ParkingLot> getParkingLots() {
-		return this.vacancies;
-	}
-	
 }

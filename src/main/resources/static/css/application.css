@@ -1,0 +1,60 @@
+
+.flex-panel-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.flex-panel-header div:first-child {
+	margin-right: auto;
+}
+
+.flex-panel-header div:last-child {
+ 	margin-let: auto;
+}
+
+.panel-heading h3 {
+	margin: 0;
+}
+
+.flex-parking {
+	display:flex;
+	flex-flow: row wrap;
+}
+
+.parking-box {
+	width: 15.11%;
+	height: 180px;
+	border: 1px solid black;
+	margin: 0px 0px 15px 15px;
+	display: inline-grid;
+	text-align:center;
+}
+
+.parking-box span {
+	font-size: 40px;
+}
+
+.parking-box {
+	padding: 3px;
+}
+
+.first-parking-box {
+	background: url("../images/plus.png") no-repeat center;
+	opacity: 0.3;
+	cursor: pointer;
+}
+
+.first-parking-box:hover {
+	cursor: pointer;
+}
+
+.parking-box i:hover {
+	cursor: pointer;
+}
+
+.panel-body-car-registering {
+	padding: 15px 15px 0px 0px;
+}
+
+
+

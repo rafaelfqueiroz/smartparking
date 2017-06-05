@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartparking.domain.CarParking;
+import com.smartparking.domain.Car;
 import com.smartparking.domain.User;
-import com.smartparking.repositories.CarParkingRepository;
+import com.smartparking.repositories.CarRepository;
 import com.smartparking.repositories.UserRepository;
 import com.smartparking.services.UserService;
 import com.smartparking.vo.UserVO;
 
 @RestController
 @RequestMapping(value="/user")
-public class UserController {
+public class UserRestController {
 
 	@Autowired
 	private UserService userService;
@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private CarParkingRepository carParkingRepository;
+	private CarRepository carParkingRepository;
 	
 	/*
 	 * Creates a new user
@@ -71,7 +71,7 @@ public class UserController {
 	 */
 	@GetMapping(value="/")
 	public ResponseEntity<List<UserVO>> users() {
-		List<UserVO> usersVO = userService.findUsers()
+		List<UserVO> usersVO = userService.getAll()
 				.stream().map(UserVO::new).collect(Collectors.toList());
 		return new ResponseEntity<>(usersVO, HttpStatus.OK);
 		
@@ -89,6 +89,6 @@ public class UserController {
 	@GetMapping(value="/populate")
 	public void populateParking() {
 		User user = userRepository.save(new User("teste", "teste", ""));
-		carParkingRepository.save(new CarParking("3000000000000000000000007549", user));
+		carParkingRepository.save(new Car("3000000000000000000000007549", user));
 	}
 }

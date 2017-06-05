@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="car_parking")
-public class CarParking implements Feed {
+@Table(name="car")
+public class Car implements Feed {
 
 	private static final long serialVersionUID = -2579237975586078331L;
 	@Id
@@ -18,17 +18,19 @@ public class CarParking implements Feed {
 	private Integer id;
 	private String tagValue;
 	
+	private boolean active;
+	
 	@ManyToOne
-	@JoinColumn(name="usuario_id")
+	@JoinColumn(name="user_id")
 	private User user;
 	
-	public CarParking() {}
+	public Car() {}
 	
-	public CarParking(String tagValue) {
+	public Car(String tagValue) {
 		this.tagValue = tagValue;
 	}
 	
-	public CarParking(String tagValue, User user) {
+	public Car(String tagValue, User user) {
 		this.tagValue = tagValue;
 		this.user = user;
 	}
@@ -57,6 +59,16 @@ public class CarParking implements Feed {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 }

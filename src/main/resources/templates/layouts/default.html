@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>SmartParking IoT</title>
+
+		<link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" 
+			  th:href="@{/vendor/bootstrap-3.3.7/css/bootstrap.min.css}" />
+			  
+			  <link rel="stylesheet" type="text/css" media="all" href="../../css/font-awesome.min.css" 
+			  th:href="@{/vendor/font-awesome-4.7.0/css/font-awesome.min.css}" />
+
+		<link rel="stylesheet" type="text/css" media="all" href="../../css/application.css" 
+			  th:href="@{/css/application.css}" />
+		
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> 
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">SmartParking IoT</a> 
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							<a th:href="@{/}">Home</a>
+						</li>
+						<li class="">
+							<a th:href="@{/app/user/index}">Users</a>
+						</li>
+						<li class="">
+							<a th:href="@{/app/car/index}">Cars</a>
+						</li>
+						<li class="">
+							<a th:href="@{/app/parkinglot/index}">Parking Lots</a>
+						</li>
+					</ul> 
+				</div> 
+			</div>
+		</nav>
+		<div class="container" layout:fragment="content">
+		</div>
+		<script type="text/javascript" th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendor/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/application.js}"></script>
+	</body>
+</html>

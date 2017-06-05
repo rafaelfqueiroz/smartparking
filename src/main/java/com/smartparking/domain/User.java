@@ -18,7 +18,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.smartparking.vo.UserVO;
 
 @Entity
-@Table(name="usuario")
+@Table(name="users")
 public class User implements Feed {
 
 	private static final long serialVersionUID = -4270237293037639138L;
@@ -30,6 +30,7 @@ public class User implements Feed {
 	private String login;
 	private String password;
 	private String token;
+	private boolean active;
 	
 	@CreationTimestamp
 	private Date createdAt;
@@ -38,7 +39,7 @@ public class User implements Feed {
 	private Date updatedAt;
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<CarParking> cars;
+	private List<Car> cars;
 	
 	public User() {	}
 	
@@ -83,11 +84,11 @@ public class User implements Feed {
 		this.token = token;
 	}
 	
-	public List<CarParking> getCars() {
+	public List<Car> getCars() {
 		return cars;
 	}
 	
-	public void setCars(List<CarParking> cars) {
+	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
 	
@@ -105,5 +106,20 @@ public class User implements Feed {
 	
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public boolean isActive() {
+		return active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	@Override
+	public String toString() {
+		return "Login: " + login + " | Senha: " + password + " | Token:" + token;
 	}
 }

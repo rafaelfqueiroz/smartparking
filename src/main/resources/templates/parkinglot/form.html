@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="layouts/default">
+	<head>
+	</head>
+	<body>
+		<div class="container" layout:fragment="content">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Parking Lot Registering</h3>
+				</div>
+				
+				<div class="panel-body panel-body-car-registering">
+					<div class="flex-parking">
+						<div class="parking-box first-parking-box">
+						</div>
+						<div class="parking-box" th:each="lot : ${lots}">
+							<div>
+								<i class="fa fa-minus pull-right" onclick="remove_parking_lot(${lot.id}, this)"></i>
+							</div>
+							<span th:text="${'#' + lot.number}"></span>
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer clearfix">
+					<button type="submit" class="btn btn-primary pull-right" th:text="Register"></button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -18,6 +18,7 @@ public class ParkingLot implements Feed {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Integer number;
+	private boolean active;
 	
 	/**
 	 * 0 - FREE
@@ -88,6 +89,16 @@ public class ParkingLot implements Feed {
 	
 	public boolean isOccupied() {
 		return getState() == StateTypes.OCCUPIED.ordinal();
+	}
+
+	@Override
+	public boolean isActive() {
+		return active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 }

@@ -3,15 +3,15 @@ package com.smartparking.vo;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CarParkingVO implements VO {
+public class CarVO implements VO {
 
 	private static final long serialVersionUID = -2759988804162040146L;
 	
 	private String tagValue;
 	
-	public CarParkingVO() {}
+	public CarVO() {}
 	
-	public CarParkingVO(String tagValue) {
+	public CarVO(String tagValue) {
 		this.tagValue = tagValue;
 	}
 

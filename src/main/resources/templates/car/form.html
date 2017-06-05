@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="layouts/default">
+	<head>
+	</head>
+	<body>
+		<div class="container" layout:fragment="content">
+			<form th:action="@{/app/car/}" th:object="${car}" method="post">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3>Car Registering</h3>
+					</div>
+					
+					<div class="panel-body">
+						<div class="row">
+							<input type="hidden" th:field="*{id}" />
+							<div class="col-md-12">
+								<div class="col-md-6 input-group">
+									<label>Tag Value</label>
+									<input type="text" class="form-control" th:field="*{tagValue}" />
+								</div>
+								<div class="col-md-6 input-group">
+									<label>User</label>
+									<select class="form-control" th:field="*{user.id}">
+										<option value="-1">-- Select --</option>
+										<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.login}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer clearfix">
+						<button type="submit" class="btn btn-primary pull-right" th:text="Register"></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

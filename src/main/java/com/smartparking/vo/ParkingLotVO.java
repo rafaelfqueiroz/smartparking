@@ -17,9 +17,7 @@ public class ParkingLotVO implements VO {
 		return number;
 	}
 	
-	public ParkingLotVO() {
-		
-	}
+	public ParkingLotVO() {	}
 	
 	public ParkingLotVO(Integer number, Integer state) {
 		this.number = number;

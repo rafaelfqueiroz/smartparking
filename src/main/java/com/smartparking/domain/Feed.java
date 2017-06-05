@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 public interface Feed extends Serializable{
 	
-	public Integer getId();
-	public void setId(Integer id);
+	Integer getId();
+	void setId(Integer id);
+	
+	boolean isActive();
+	void setActive(boolean active);
 	
 }
