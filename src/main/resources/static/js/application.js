@@ -34,3 +34,15 @@ function remove_parking_lot(id_lot, box) {
 		})
 	});
 }
+
+function get_parking_color(div, state) {
+	if (state == 0) {
+		$(div).css("background-color", "#cbffc2");
+	}
+	if (state == 1) {
+		$(div).css("background-color", "#d1edff");
+	}
+	if (state == 2) {
+		$(div).css("background-color", "#ff9e9e");
+	}
+}

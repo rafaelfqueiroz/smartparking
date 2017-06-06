@@ -21,6 +21,15 @@ layout:decorator="layouts/default">
 				<div class="panel-body">
 					<div class="parking-box align-middle" th:each="lot : ${entities}">
 						<span class="align-middle" th:text="${'#' + lot.number}"></span>
+						<div style="background:#cbffc2" th:if="${lot.isFree()}">
+							<span></span>
+						</div>
+						<div style="background:#d1edff" th:if="${lot.isReserved()}">
+							<span></span>
+						</div>
+						<div style="background:#ff9e9e" th:if="${lot.isOccupied()}">
+							<span></span>
+						</div>
 					</div>
 				</div>
 			</div>
