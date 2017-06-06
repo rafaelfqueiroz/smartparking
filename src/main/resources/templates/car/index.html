@@ -24,12 +24,18 @@ layout:decorator="layouts/default">
 			  				<tr>
 			  					<th>User</th>
 			  					<th>Tag Value</th>
+			  					<th></th>
 			  				</tr>
 			  			</thead>
 			  			<tbody>
 			  				<tr th:each="car : ${entities}">
 			  					<td th:text="${car.user.login}"></td>
 			  					<td th:text="${car.tagValue}"></td>
+			  					<td class="col-md-2">
+			  						<a class="btn btn-default" th:href="@{|/app/car/${car.id}|}" title="Edit car">
+			  							<i class="glyphicon glyphicon-edit"></i>
+			  						</a>
+			  					</td>
 			  				</tr>
 			  			</tbody>
 		  			</table>
