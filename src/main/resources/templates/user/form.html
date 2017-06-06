@@ -22,7 +22,7 @@ layout:decorator="layouts/default">
 								</div>
 								<div class="col-md-6 input-group">
 									<label>Password</label>
-									<input type="password" class="form-control" th:field="*{password}" th:text="${user.password}" />
+									<input type="password" name="password" class="form-control" th:value="${user.password}" />
 								</div>
 								<div class="col-md-12 input-group">
 									<label>Token</label>
